@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Page</title>
+</head>
+
+<body>
+    <h1>Status Page</h1>
+    <div id="statusContainer">
+        <p id="water"></p>
+        <p id="waterStatus"></p>
+        <p id="wind"></p>
+        <p id="windStatus"></p>
+    </div>
+
+    <script>
+        function fetchData() {
+            // Lakukan HTTP GET request ke localhost:8080/status
+            fetch('http://localhost:8080/status')
+                .then(response => response.json())
+                .then(data => {
+                    
+                    document.getElementById('water').innerText = `Water: ${data.Water}`;
+                    document.getElementById('waterStatus').innerText = `Water Status: ${data.WaterStatus}`;
+                    document.getElementById('wind').innerText = `Wind: ${data.Wind}`;
+                    document.getElementById('windStatus').innerText = `Wind Status: ${data.WindStatus}`;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+       
+        setInterval(fetchData, 15000); 
+    </script>
+</body>
+
+</html>
